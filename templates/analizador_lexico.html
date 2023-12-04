@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Configuración de la codificación y la vista -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título de la página -->
+    <title>Analizador Léxico</title>
+
+    <!-- Enlace a los estilos de Bootstrap (asegúrate de incluir este enlace) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Estilos personalizados, si es necesario -->
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+
+    <!-- Encabezado de la página -->
+    <h1 class="mb-4">Análisis Léxico</h1>
+    
+    <!-- Formulario para ingresar la expresión matemática -->
+    <form method="post" action="{{ url_for('analizador_lexico') }}" class="mb-4">
+        <div class="mb-3">
+            <!-- Etiqueta y entrada para la expresión matemática -->
+            <label for="expression" class="form-label">Ingresa la expresión matemática:</label>
+            <input type="text" name="expression" id="expression" class="form-control" required>
+        </div>
+        <!-- Botón para enviar el formulario -->
+        <button type="submit" class="btn btn-primary">Analizar</button>
+    </form>
+
+    <!-- Sección para mostrar los resultados del análisis léxico -->
+    {% if result %}
+        <div class="mb-4">
+            <h2>Tokens encontrados:</h2>
+            <!-- Mostrar los tokens encontrados -->
+            <p class="lead">{{ result['tokens'] }}</p>
+        </div>
+    {% endif %}
+
+    <!-- Mostrar mensaje de error si hay algún problema con el token -->
+    {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+    <!-- Enlace para volver al inicio -->
+    <a class="btn btn-primary" href="/">Volver al Inicio</a>
+
+    <!-- Scripts de Bootstrap (asegúrate de incluir estos scripts al final del cuerpo del documento) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador Semántico</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .resultado-positivo {
+            color: green; /* Establece el color para resultados positivos */
+            font-size: 50px; /* Ajusta el tamaño de la fuente según tus preferencias */
+        }
+
+        .resultado-negativo {
+            color: red; /* Establece el color para resultados negativos */
+            font-size: 50px; /* Ajusta el tamaño de la fuente según tus preferencias */
+        }
+
+        #mensaje {
+            width: 500px; /* Ajusta el ancho según tus preferencias */
+            height: 100px; /* Ajusta la altura según tus preferencias */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Analizador Semántico</h1>
+
+        <!-- Formulario para analizar emociones -->
+        <form method="post" action="/analizador_semantico">
+            <label for="mensaje">Ingrese su mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="4" cols="50" required></textarea>
+            <button type="submit">Analizar</button>
+        </form>
+
+        <!-- Mostrar resultados si están disponibles -->
+        {% if mensaje %}
+            <div class="resultado-container mt-4">
+                <h2>Resultado:</h2>
+                <p class="resultado"style="font-size: 3em;">Mensaje: {{ mensaje }}</p>
+                
+                {% if estrellas > 3 %}
+                    <p class="resultado resultado-positivo">Estrellas: {{ estrellas }}</p>
+                {% else %}
+                    <p class="resultado resultado-negativo">Estrellas: {{ estrellas }}</p>
+                {% endif %}
+                
+                {% if score > 0.5 %}
+                    <p class="resultado resultado-positivo">Confianza: {{ score }}</p>
+                {% else %}
+                    <p class="resultado resultado-negativo">Confianza: {{ score }}</p>
+                {% endif %}
+                
+                <!-- Emoji no tiene valores numéricos, así que puedes agregar una lógica diferente o simplemente mostrarlo sin cambiar el estilo -->
+                <p class="resultado" style="font-size: 3em;">Emoji: {{ emoji }}</p>
+            </div>
+        {% endif %}
+
+        <!-- Resto del contenido de la página, si es necesario -->
+        <a class="btn btn-primary" href="/">Volver al Inicio</a>
+    </div>
+</body>
+</html>
